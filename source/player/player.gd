@@ -6,6 +6,9 @@ signal dodge
 onready var _label_attack = $LabelAttack
 onready var _label_dodge = $LabelDodge
 
+onready var _timer_attack = $TimerAttack
+onready var _timer_dodge = $TimerDodge
+
 const _attack_text = "Attack: "
 const _dodge_text = "Dodge: "
 
@@ -47,10 +50,14 @@ func _physics_process(_delta):
 
 func _attack():
 	$Animation.play("attack")
+	_timer_attack.start()
+	print("attack timer should start")
 	emit_signal("attack")
 
 func _dodge():
 	$Animation.play("dodge")
+	_timer_dodge.start()
+	print("dodge timer should start")
 	emit_signal("dodge")
 
 func _hurt():
@@ -74,3 +81,11 @@ func _get_random_unused_key(_previous_key: String, _used_key: String) -> String:
 		_new_key = _keys.front()
 	
 	return _new_key
+
+func _on_TimerAttack_timeout():
+	print("idle should play now")
+	$Animation.play("idle")
+
+func _on_TimerDodge_timeout():
+	print("idle should be play now")
+	$Animation.play("idle")
