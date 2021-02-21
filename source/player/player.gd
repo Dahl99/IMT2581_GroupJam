@@ -6,9 +6,7 @@ signal dodge
 onready var _label_attack = $LabelAttack
 onready var _label_dodge = $LabelDodge
 
-onready var _timer_attack = $TimerAttack
-onready var _timer_dodge = $TimerDodge
-onready var _timer_hurt = $TimerHurt
+onready var _timer_animation = $TimerAnimation
 
 onready var _health_bar = $TextureProgress
 
@@ -21,8 +19,8 @@ var _keys = ["A", "X", "Space", "P", "8", "B"]
 var _attack_btn: String
 var _dodge_btn: String
 
-var _max_health = 10	# Keeps track of player max health
-var _health = 10		# Keeps track of player health
+var _max_health = 5	# Keeps track of player max health
+var _health = 5		# Keeps track of player health
 
 # When player object is created,
 # the keys will be shuffled
@@ -53,12 +51,12 @@ func _physics_process(_delta):
 
 func _attack():
 	$Animation.play("attack")
-	_timer_attack.start()
+	_timer_animation.start()
 	emit_signal("attack")
 
 func _dodge():
 	$Animation.play("dodge")
-	_timer_dodge.start()
+	_timer_animation.start()
 	emit_signal("dodge")
 
 func _hurt():
@@ -69,7 +67,7 @@ func _hurt():
 		$Animation.play("die")
 	else:
 		$Animation.play("hurt")
-		_timer_hurt.start()
+		_timer_animation.start()
 
 
 # Gets a randomly chosen new key
@@ -86,11 +84,5 @@ func _get_random_unused_key(_previous_key: String, _used_key: String) -> String:
 	
 	return _new_key
 
-func _on_TimerAttack_timeout():
-	$Animation.play("idle")
-
-func _on_TimerDodge_timeout():
-	$Animation.play("idle")
-
-func _on_TimerHurt_timeout():
+func _on_TimerAnimation_timeout():
 	$Animation.play("idle")

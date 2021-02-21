@@ -80,7 +80,7 @@ script = ExtResource( 2 )
 scale = Vector2( 12, 12 )
 frames = SubResource( 7 )
 animation = "idle"
-frame = 1
+frame = 3
 playing = true
 flip_h = true
 
@@ -106,7 +106,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TimerAttack" type="Timer" parent="."]
+[node name="TimerAnimation" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
@@ -120,9 +120,9 @@ one_shot = true
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 margin_left = -120.0
-margin_top = -377.759
+margin_top = -349.727
 margin_right = 120.0
-margin_bottom = -317.759
+margin_bottom = -289.727
 max_value = 5.0
 value = 5.0
 texture_over = ExtResource( 1 )
@@ -130,6 +130,5 @@ texture_progress = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="timeout" from="TimerAttack" to="." method="_on_TimerAttack_timeout"]
 [connection signal="timeout" from="TimerDodge" to="." method="_on_TimerDodge_timeout"]
 [connection signal="timeout" from="TimerHurt" to="." method="_on_TimerHurt_timeout"]
