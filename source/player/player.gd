@@ -10,6 +10,8 @@ onready var _timer_attack = $TimerAttack
 onready var _timer_dodge = $TimerDodge
 onready var _timer_hurt = $TimerHurt
 
+onready var _health_bar = $TextureProgress
+
 const _attack_text = "Attack: "
 const _dodge_text = "Dodge: "
 
@@ -62,6 +64,7 @@ func _dodge():
 func _hurt():
 	_health -= 1
 
+	_health_bar.value = _health
 	if _health <= 0:
 		$Animation.play("die")
 	else:
