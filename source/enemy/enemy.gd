@@ -8,7 +8,7 @@ onready var prepare_timer = $AttackPrepareTimer
 onready var animation_player = $AnimationPlayer
 
 var max_health = 5
-var health = 5
+export (int) var health = 5
 var dead : bool = false
 
 # This function PREPARES the attack. It's the same as indication
@@ -24,11 +24,7 @@ func start_attack_timer():
 
 func _ready():
 	start_prepare_timer()
-	get_parent().connect("take_damage", self, "_on_take_damage")
-
-func _on_take_damage():
-	health = health - 1
-	animation_player.play("Take Damage")
+	get_parent().connect("deal_damage", self, "_on_take_damage")
 
 func die():
 	health = max_health
@@ -37,11 +33,17 @@ func die():
 	animation_player.play("Die")
 	
 
+
+func _on_take_damage():
+	health = health - 1
+	animation_player.play("Take Damage")
+
 func _on_AttackTimer_timeout():
 	animation_player.play("Attack")
 	emit_signal("attack")
 
 func _on_AttackPrepareTimer_timeout():
+	animation_player.stop()
 	animation_player.play("Prepare Attack")
 	emit_signal("prepare_attack")
 	start_attack_timer()

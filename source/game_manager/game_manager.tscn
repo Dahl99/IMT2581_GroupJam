@@ -7,3 +7,14 @@
 script = ExtResource( 1 )
 
 [node name="Enemy" parent="." instance=ExtResource( 2 )]
+position = Vector2( 216.951, 57.1808 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = 69.0
+margin_top = 106.0
+margin_right = 243.0
+margin_bottom = 192.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="Button" to="." method="_on_Button_button_down"]
