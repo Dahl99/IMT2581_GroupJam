@@ -68,6 +68,8 @@ script = ExtResource( 2 )
 scale = Vector2( 12, 12 )
 frames = SubResource( 6 )
 animation = "idle"
+frame = 3
+playing = true
 
 [node name="LabelAttack" type="Label" parent="."]
 margin_left = -39.335
@@ -90,3 +92,13 @@ text = "Dodge: A"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TimerAttack" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="TimerDodge" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+[connection signal="timeout" from="TimerAttack" to="." method="_on_TimerAttack_timeout"]
+[connection signal="timeout" from="TimerDodge" to="." method="_on_TimerDodge_timeout"]
