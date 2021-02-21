@@ -17,6 +17,8 @@ var _health = 10		# Keeps track of player health
 # and a random attack and dodge
 # key will be chosen
 func _ready():
+	get_parent().connect("enemy_deal_damage", self, "_hurt")
+
 	_keys.shuffle()
 	_attack_btn = _keys.front()
 	_dodge_btn = _keys.back()
@@ -39,8 +41,8 @@ func _dodge():
 	$Animation.play("dodge")
 	emit_signal("dodge")
 
-func _hurt(_dmg_taken: int):
-	_health -= _dmg_taken
+func _hurt():
+	_health -= 1
 
 	if _health <= 0:
 		$Animation.play("die")
