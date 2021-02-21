@@ -26,15 +26,15 @@ func _ready():
 	get_parent().connect("player_deal_damage", self, "_on_take_damage")
 
 func _die():
-	health = max_health
-	
 	attack_timer.stop()
 	prepare_timer.stop()
 	
 	animation_player.clear_queue()
 	animation_player.play("Die")
-	
 
+func _respawn():
+	health = max_health
+	animation_player.play("Respawn")
 
 func _on_take_damage():
 	health = health - 1
