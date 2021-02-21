@@ -11,6 +11,8 @@ onready var _timer_dodge_cd = $TimerDodgeCD
 
 var _is_dodge_on_cd = false
 
+onready var _health_bar = $TextureProgress
+
 const _attack_text = "Attack: "
 const _dodge_text = "Dodge: "
 
@@ -20,8 +22,8 @@ var _keys = ["A", "X", "Space", "P", "8", "B"]
 var _attack_btn: String
 var _dodge_btn: String
 
-var _max_health = 10	# Keeps track of player max health
-var _health = 10		# Keeps track of player health
+var _max_health = 5	# Keeps track of player max health
+var _health = 5		# Keeps track of player health
 
 # When player object is created,
 # the keys will be shuffled
@@ -65,6 +67,7 @@ func _dodge():
 func _hurt():
 	_health -= 1
 
+	_health_bar.value = _health
 	if _health <= 0:
 		$Animation.play("die")
 	else:
