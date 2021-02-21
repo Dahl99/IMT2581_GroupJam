@@ -64,7 +64,7 @@ func _on_enemy_died():
 	if enemies_killed >= 1:
 		add_child(pop_up)
 		pop_up.visible = true
-		pop_up.rect_position = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
+		pop_up.rect_position = Vector2(get_viewport().size.x/3, get_viewport().size.y/3)
  
 func _on_Button_button_down():
 	_player_attack()

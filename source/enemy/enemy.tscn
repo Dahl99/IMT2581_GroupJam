@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://source/enemy/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemy/SMS_Ranger_Punch_1.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://assets/enemy/SMS_Ranger_KnockDown.png" type="Texture" id=5]
 [ext_resource path="res://assets/enemy/SMS_Ranger_Get_Up.png" type="Texture" id=6]
 [ext_resource path="res://assets/enemy/SMS_Ranger_Strafe_2_strip4.png" type="Texture" id=7]
+[ext_resource path="res://source/menus/health_bar.png" type="Texture" id=8]
+[ext_resource path="res://source/menus/health_bar_green.png" type="Texture" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
@@ -176,7 +178,7 @@ tracks/3/keys = {
 "values": [ Rect2( 0, 0, 16, 32 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 resource_name = "Respawn"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
@@ -268,7 +270,7 @@ region_rect = Rect2( 0, 0, 16, 32 )
 anims/Attack = SubResource( 1 )
 anims/Die = SubResource( 2 )
 "anims/Prepare Attack" = SubResource( 3 )
-anims/Respawn = SubResource( 4 )
+anims/Respawn = SubResource( 6 )
 "anims/Take Damage" = SubResource( 5 )
 
 [node name="AttackTimer" type="Timer" parent="."]
@@ -276,5 +278,18 @@ one_shot = true
 
 [node name="AttackPrepareTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_left = -120.208
+margin_top = -304.056
+margin_right = 119.792
+margin_bottom = -244.056
+max_value = 5.0
+value = 5.0
+texture_over = ExtResource( 8 )
+texture_progress = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="AttackPrepareTimer" to="." method="_on_AttackPrepareTimer_timeout"]

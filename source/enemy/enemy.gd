@@ -7,6 +7,7 @@ signal enemy_died
 onready var attack_timer = $AttackTimer
 onready var prepare_timer = $AttackPrepareTimer
 onready var animation_player = $AnimationPlayer
+onready var health_bar = $TextureProgress
 
 var max_health = 5
 export (int) var health = 5
@@ -29,6 +30,7 @@ func _ready():
 func _die():
 	attack_timer.stop()
 	prepare_timer.stop()
+	health_bar.visible = false
 	
 	emit_signal("enemy_died")
 	
@@ -37,12 +39,14 @@ func _die():
 
 func _respawn():
 	health = max_health
+	health_bar.value = health
 	animation_player.play("Respawn")
 	start_prepare_timer()
-	
+	health_bar.visible = true
 
 func _on_take_damage():
 	health = health - 1
+	health_bar.value = health
 	if health <= 0:
 		_die()
 	else:
