@@ -8,6 +8,7 @@ onready var _label_dodge = $LabelDodge
 
 onready var _timer_attack = $TimerAttack
 onready var _timer_dodge = $TimerDodge
+onready var _timer_hurt = $TimerHurt
 
 const _attack_text = "Attack: "
 const _dodge_text = "Dodge: "
@@ -65,6 +66,8 @@ func _hurt():
 		$Animation.play("die")
 	else:
 		$Animation.play("hurt")
+		_timer_hurt.start()
+
 
 # Gets a randomly chosen new key
 # that's not equal to previously used key
@@ -84,4 +87,7 @@ func _on_TimerAttack_timeout():
 	$Animation.play("idle")
 
 func _on_TimerDodge_timeout():
+	$Animation.play("idle")
+
+func _on_TimerHurt_timeout():
 	$Animation.play("idle")
