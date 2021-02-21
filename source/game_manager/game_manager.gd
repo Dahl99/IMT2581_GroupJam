@@ -13,6 +13,7 @@ var evade_damage : bool = true
 
 func _ready():
 	_conecc_enemy()
+	_conecc_player()
 	
 	randomize() 			# Randomizes rng seed
 
@@ -20,6 +21,7 @@ func _ready():
 	enemy.position = Vector2(216, 57)
 
 	self.add_child(player)	# Adding player to scene
+	player.position = Vector2(1024/2, 768/2)
 
 func _conecc_enemy():
 	enemy.connect("attack", self, "_attack_by_enemy")

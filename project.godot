@@ -19,6 +19,10 @@ config/name="IMT2581_GroupJam"
 run/main_scene="res://source/game_manager/game_manager.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/height=768
+
 [input]
 
 A={

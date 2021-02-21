@@ -20,6 +20,7 @@ func _ready():
 	_keys.shuffle()
 	_attack_btn = _keys.front()
 	_dodge_btn = _keys.back()
+	$Animation.play("idle")
 
 func _physics_process(_delta):
 	if Input.is_action_just_pressed(_attack_btn):						# Checking if attack button is pressed
@@ -31,15 +32,20 @@ func _physics_process(_delta):
 		_dodge_btn = _get_random_unused_key(_dodge_btn, _attack_btn)	# Assigning new key for dodge action
 
 func _attack():
-	# animation.play
+	$Animation.play("attack")
 	emit_signal("attack")
 
 func _dodge():
-	# animation.play
+	$Animation.play("dodge")
 	emit_signal("dodge")
 
 func _hurt(_dmg_taken: int):
 	_health -= _dmg_taken
+
+	if _health <= 0:
+		$Animation.play("die")
+	else:
+		$Animation.play("hurt")
 
 # Gets a randomly chosen new key
 # that's not equal to previously used key
