@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+signal attack
+signal dodge
+
 # Varables used to keep track of currently used buttons
 var _keys = ["A", "X", "Space", "P", "8", "B"]
 
@@ -28,10 +31,12 @@ func _physics_process(_delta):
 		_dodge_btn = _get_random_unused_key(_dodge_btn, _attack_btn)	# Assigning new key for dodge action
 
 func _attack():
-	pass
+	# animation.play
+	emit_signal("attack")
 
 func _dodge():
-	pass
+	# animation.play
+	emit_signal("dodge")
 
 func _hurt(_dmg_taken: int):
 	_health -= _dmg_taken
