@@ -7,6 +7,9 @@ onready var _label_attack = $LabelAttack
 onready var _label_dodge = $LabelDodge
 
 onready var _timer_animation = $TimerAnimation
+onready var _timer_dodge_cd = $TimerDodgeCD
+
+var _is_dodge_on_cd = false
 
 const _attack_text = "Attack: "
 const _dodge_text = "Dodge: "
@@ -42,7 +45,7 @@ func _physics_process(_delta):
 		_attack_btn = _get_random_unused_key(_attack_btn, _dodge_btn)	# Assigning new key for attack action
 		_label_attack.text = _attack_text + _attack_btn
 
-	elif Input.is_action_just_pressed(_dodge_btn):						# Checking if dodge button is pressed
+	elif Input.is_action_just_pressed(_dodge_btn) and not _is_dodge_on_cd:						# Checking if dodge button is pressed
 		_dodge()														# Executing dodge
 		_dodge_btn = _get_random_unused_key(_dodge_btn, _attack_btn)	# Assigning new key for dodge action
 		_label_dodge.text = _dodge_text + _dodge_btn
@@ -53,6 +56,8 @@ func _attack():
 	emit_signal("attack")
 
 func _dodge():
+	_is_dodge_on_cd = true
+	_timer_dodge_cd.start()
 	$Animation.play("dodge")
 	_timer_animation.start()
 	emit_signal("dodge")
@@ -83,3 +88,6 @@ func _get_random_unused_key(_previous_key: String, _used_key: String) -> String:
 
 func _on_TimerAnimation_timeout():
 	$Animation.play("idle")
+
+func _on_TimerDodgeCD_timeout():
+	_is_dodge_on_cd = false

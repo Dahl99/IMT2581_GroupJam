@@ -107,4 +107,9 @@ __meta__ = {
 [node name="TimerAnimation" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="TimerDodgeCD" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 [connection signal="timeout" from="TimerAnimation" to="." method="_on_TimerAnimation_timeout"]
+[connection signal="timeout" from="TimerDodgeCD" to="." method="_on_TimerDodgeCD_timeout"]
