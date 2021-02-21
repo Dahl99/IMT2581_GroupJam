@@ -32,8 +32,8 @@ func _conecc_enemy():
 
 
 func _conecc_player():
-	player.connect("dodge", self, "player_evade_attack")
-	player.connect("attack", self, "player_attack")
+	player.connect("dodge", self, "_player_evade_attack")
+	player.connect("attack", self, "_player_attack")
 
 # Is run when the preparation attack signal is sent.
 # Does not deal damage by itself, but simply enables
