@@ -28,6 +28,10 @@ func _ready():
 	_keys.shuffle()
 	_attack_btn = _keys.front()
 	_dodge_btn = _keys.back()
+
+	_label_attack.text = _attack_text + _attack_btn
+	_label_dodge.text = _dodge_text + _dodge_btn
+
 	$Animation.play("idle")
 
 func _physics_process(_delta):
