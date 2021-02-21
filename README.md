@@ -1,4 +1,4 @@
-# IMT2581 Solo Game Jam
+# IMT2581 Group Game Jam
 
 ## About
 
